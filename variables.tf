@@ -10,6 +10,12 @@ variable "name" {
   default     = ""
 }
 
+variable "nameformat" {
+  description = "Instance name format. Default is set to 2 decomal with leading 0. Example: %03d for 3 decimal places including a leading zero, or %02dprod for additional suffixes"
+  type        = string
+  default     = "%02d"
+}
+
 variable "ami" {
   description = "ID of AMI to use for the instance"
   type        = string
@@ -92,6 +98,12 @@ variable "iam_instance_profile" {
   description = "IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile"
   type        = string
   default     = null
+}
+
+variable "instances" {
+  description = "The number of EC2 instances to deploy"
+  type        = number
+  default     = 1
 }
 
 variable "instance_initiated_shutdown_behavior" {

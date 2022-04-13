@@ -1,11 +1,12 @@
 locals {
   create = var.create && var.putin_khuylo
+  name   = format("${var.name}${var.nameformat}", count.index + 1)
 
   is_t_instance_type = replace(var.instance_type, "/^t(2|3|3a){1}\\..*$/", "1") == "1" ? true : false
 }
 
 resource "aws_instance" "this" {
-  count = local.create && !var.create_spot_instance ? 1 : 0
+  count = local.create && !var.create_spot_instance ? 1 : 0 && var.instances
 
   ami                  = var.ami
   instance_type        = var.instance_type
